@@ -1,20 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {WebView} from "react-native-webview"
+import {ActivityIndicator, StatusBar,StyleSheet} from "react-native"
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const App =  () => (
+    <WebView
+        source={{uri: "https:jk-mobile.vercel.app"}}
+        style={{
+            marginTop: StatusBar.currentHeight
+        }}
+        renderLoading={LoadingIndicator}
+        startInLoadingState
+        javaScriptEnabled
+        domStorageEnabled
+    />
+)
+
+export default App
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    IndicatorStyle: {
+        position: "absolute",
+        alignItems: "center",
+        justifyContent: "center",
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0
+    }
 });
+export const LoadingIndicator = () => {
+    return (
+        <ActivityIndicator
+            color="#3235fd"
+            size="large"
+            style={styles.IndicatorStyle}
+        />
+    );
+};
+
